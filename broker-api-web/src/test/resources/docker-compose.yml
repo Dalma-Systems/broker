@@ -1,0 +1,11 @@
+---
+mongo:
+  command: "--nojournal"
+  image: "mongo:3.6"
+orion:
+  command: "-dbhost mongo"
+  image: fiware/orion
+  links:
+    - mongo
+  ports:
+    - "1027:1026"

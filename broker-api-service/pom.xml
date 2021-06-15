@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.dalma.broker</groupId>
+        <artifactId>dalma-broker</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>dalma-broker-service</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>${project.parent.artifactId}-interface</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>${project.parent.artifactId}-fiware</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dalma.contract</groupId>
+            <artifactId>dalma-contract-workorder</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dalma.contract</groupId>
+            <artifactId>dalma-contract-robot</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dalma.contract</groupId>
+            <artifactId>dalma-contract-subscription</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dalma.common</groupId>
+            <artifactId>dalma-common-workorder</artifactId>
+        </dependency>
+        <!-- plugins -->
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+</project>

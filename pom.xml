@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.4.RELEASE</version>
+        <relativePath/>
+    </parent>
+    <groupId>com.dalma.broker</groupId>
+    <artifactId>dalma-broker</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>dalma-broker</name>
+    <description>Dalma Broker Api project</description>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>broker-api-fiware</module>
+        <module>broker-api-interface</module>
+        <module>broker-api-service</module>
+        <module>broker-api-web</module>
+        <module>broker-api-base</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <java.version>11</java.version>
+
+        <!-- plugins -->
+        <jasypt.version>2.0.0</jasypt.version>
+        <guava.version>28.0-jre</guava.version>
+        <lombok.version>1.18.12</lombok.version>
+        <commons-io.version>2.6</commons-io.version>
+        <org.json.version>20190722</org.json.version>
+        <modelmapper.version>2.3.6</modelmapper.version>
+        <swagger.version>2.9.2</swagger.version>
+        <sentry-spring.version>1.7.30</sentry-spring.version>
+        <surefire-plugin.version>2.22.1</surefire-plugin.version>
+        <micrometer.version>1.5.4</micrometer.version>
+        <testcontainers.version>1.15.0-rc2</testcontainers.version>
+
+        <!-- code quality -->
+        <jacoco-plugin.version>0.8.2</jacoco-plugin.version>
+        <sonar-plugin.version>3.5.0.1254</sonar-plugin.version>
+
+        <!-- database -->
+        <mysql-connector.version>8.0.19</mysql-connector.version>
+        <hibernate-search.version>5.11.5.Final</hibernate-search.version>
+
+        <!-- Bright deps -->
+        <bright.logging.version>0.0.1-SNAPSHOT</bright.logging.version>
+
+        <skipTests>false</skipTests>
+        <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+
+        <!-- Internal deps -->
+        <contract.robot.version>1.0-SNAPSHOT</contract.robot.version>
+        <contract.subscription.version>1.0-SNAPSHOT</contract.subscription.version>
+        <contract.workorder.version>1.0-SNAPSHOT</contract.workorder.version>
+        <contract.station.version>1.0-SNAPSHOT</contract.station.version>
+        <contract.warehouse.version>1.0-SNAPSHOT</contract.warehouse.version>
+        <common.workorder.version>1.0-SNAPSHOT</common.workorder.version>
+        <common.util.version>1.0-SNAPSHOT</common.util.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- spring -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-oauth2-client</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+            </dependency>
+            <!-- database -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <!-- plugins -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.modelmapper</groupId>
+                <artifactId>modelmapper</artifactId>
+                <version>${modelmapper.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>${org.json.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.sentry</groupId>
+                <artifactId>sentry-spring</artifactId>
+                <version>${sentry-spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-spring-boot-starter</artifactId>
+                <version>${jasypt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-core</artifactId>
+                <version>${micrometer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-registry-influx</artifactId>
+                <version>${micrometer.version}</version>
+            </dependency>
+            <!-- Documentation -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <!-- Tests -->
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers</artifactId>
+                <version>${testcontainers.version}</version>
+            </dependency>
+            <!-- Bright deps -->
+            <dependency>
+                <groupId>com.bybright</groupId>
+                <artifactId>bright-logging</artifactId>
+                <version>${bright.logging.version}</version>
+            </dependency>
+            <!-- Internal deps -->
+            <dependency>
+                <groupId>com.dalma.contract</groupId>
+                <artifactId>dalma-contract-robot</artifactId>
+                <version>${contract.robot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dalma.contract</groupId>
+                <artifactId>dalma-contract-subscription</artifactId>
+                <version>${contract.subscription.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dalma.contract</groupId>
+                <artifactId>dalma-contract-workorder</artifactId>
+                <version>${contract.workorder.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dalma.contract</groupId>
+                <artifactId>dalma-contract-station</artifactId>
+                <version>${contract.station.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dalma.contract</groupId>
+                <artifactId>dalma-contract-warehouse</artifactId>
+                <version>${contract.warehouse.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dalma.common</groupId>
+                <artifactId>dalma-common-workorder</artifactId>
+                <version>${common.workorder.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dalma.common</groupId>
+                <artifactId>dalma-common-util</artifactId>
+                <version>${common.util.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>${sonar-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>sonar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco-plugin.version}</version>
+                    <configuration>
+                        <append>true</append>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>prepare-agent</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                            <configuration>
+                                <!-- Sets the path to the file which contains the execution data. -->
+                                <destFile>${sonar.jacoco.reportPath}</destFile>
+                                <!-- Sets the name of the property containing the settings for JaCoCo
+                                    runtime agent. -->
+                                <propertyName>surefireArgLine</propertyName>
+                                <append>true</append>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>jacoco-site</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                            <configuration>
+                                <!-- Sets the path to the file which contains the execution data. -->
+                                <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+                                <!-- Sets the output directory for the code coverage report. -->
+                                <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${surefire-plugin.version}</version>
+                    <configuration>
+                        <!-- Sets the VM argument line used when unit tests are run. -->
+                        <argLine>${surefireArgLine}</argLine>
+                        <skipTests>${skipTests}</skipTests>
+                        <parallel>classes</parallel>
+                        <threadCount>4</threadCount>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <sonar.jacoco.reportPaths>${project.build.directory}/coverage-reports/jacoco-ut.exec
+                </sonar.jacoco.reportPaths>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonarsource.scanner.maven</groupId>
+                        <artifactId>sonar-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
